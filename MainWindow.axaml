@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Travel_Planner.MainWindow"
+        Title="Travel Planner">
+    <!-- <Grid> -->
+    <!--     <Grid.RowDefinitions> -->
+    <!--         <RowDefinition Height="2*" /> -->
+    <!--         <RowDefinition Height="*" /> -->
+    <!--         <RowDefinition Height="*" /> -->
+    <!--         <RowDefinition Height="*" /> -->
+    <!--     </Grid.RowDefinitions> -->
+    <!-- </Grid> -->
+    
+    <WrapPanel>
+        
+        <TextBox x:Name="NameSurnameTextBox" Text=""/>
+        
+        <ComboBox x:Name="CountriesComboBox" MinWidth="250" MaxWidth="400"/>
+        
+        <ListBox x:Name="CitiesListBox" MinWidth="250" MaxWidth="450"/>
+        
+        <TextBlock Text="Zaznacz atrakcje, które cię interesują" />
+        <CheckBox x:Name="MuseumCheckBox" Content="Muzea"/>
+        <CheckBox x:Name="NationalParksCheckBox" Content="Parki Narodowe"/>
+        <CheckBox x:Name="MonumentsCheckBox" Content="Zabytki"/>
+        <CheckBox x:Name="RestaurantsCheckBox" Content="Restauracje"/>
+        <CheckBox x:Name="ArtGalleriesCheckBox" Content="Galerie Sztuki"/>
+        <CheckBox x:Name="FestivalsAndConcertsCheckBox" Content="Festiwale i Koncerty"/>
+        
+        <TextBlock Text="Zaznacz preferowny środek transportu" />
+        <RadioButton x:Name="AirplaneRadioButton" Content="Samolot"/>
+        <RadioButton x:Name="CarRadioButton" Content="Samochód"/>
+        <RadioButton x:Name="ShipRadioButton" Content="Statek"/>
+        <RadioButton x:Name="TrainRadioButton" Content="Pociąg"/>
+    </WrapPanel>
+</Window>
