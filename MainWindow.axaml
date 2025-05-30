@@ -4,36 +4,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Travel_Planner.MainWindow"
-        Title="Travel Planner">
-    <!-- <Grid> -->
-    <!--     <Grid.RowDefinitions> -->
-    <!--         <RowDefinition Height="2*" /> -->
-    <!--         <RowDefinition Height="*" /> -->
-    <!--         <RowDefinition Height="*" /> -->
-    <!--         <RowDefinition Height="*" /> -->
-    <!--     </Grid.RowDefinitions> -->
-    <!-- </Grid> -->
+        Title="Travel Planner"
+        WindowStartupLocation="CenterOwner"
+        Background="OliveDrab"
+        Foreground="White">
     
-    <WrapPanel>
+    <ScrollViewer>
         
-        <TextBox x:Name="NameSurnameTextBox" Text=""/>
-        
-        <ComboBox x:Name="CountriesComboBox" MinWidth="250" MaxWidth="400"/>
-        
-        <ListBox x:Name="CitiesListBox" MinWidth="250" MaxWidth="450"/>
-        
-        <TextBlock Text="Zaznacz atrakcje, które cię interesują" />
-        <CheckBox x:Name="MuseumCheckBox" Content="Muzea"/>
-        <CheckBox x:Name="NationalParksCheckBox" Content="Parki Narodowe"/>
-        <CheckBox x:Name="MonumentsCheckBox" Content="Zabytki"/>
-        <CheckBox x:Name="RestaurantsCheckBox" Content="Restauracje"/>
-        <CheckBox x:Name="ArtGalleriesCheckBox" Content="Galerie Sztuki"/>
-        <CheckBox x:Name="FestivalsAndConcertsCheckBox" Content="Festiwale i Koncerty"/>
-        
-        <TextBlock Text="Zaznacz preferowny środek transportu" />
-        <RadioButton x:Name="AirplaneRadioButton" Content="Samolot"/>
-        <RadioButton x:Name="CarRadioButton" Content="Samochód"/>
-        <RadioButton x:Name="ShipRadioButton" Content="Statek"/>
-        <RadioButton x:Name="TrainRadioButton" Content="Pociąg"/>
-    </WrapPanel>
+        <Grid HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <WrapPanel Orientation="Vertical" Margin="12" HorizontalAlignment="Center">
+                <TextBlock Margin="7" HorizontalAlignment="Center" Text="Podaj imię i nazwisko" />
+                <TextBox x:Name="NameTextBox" Margin="5" Watermark="Imię..."/>
+                <TextBox x:Name="SurnameTextBox" Margin="5" Watermark="Nazwisko..."/>
+            </WrapPanel>
+            
+            <WrapPanel Grid.Row="1" Orientation="Vertical" Margin="12" HorizontalAlignment="Center">
+                <TextBlock Margin="7" HorizontalAlignment="Center" Text="Wybierz kraj" />
+                <ComboBox x:Name="CountriesComboBox" Margin="5" MinWidth="250" MaxWidth="400"/>
+            </WrapPanel>
+            
+            <Grid Grid.Row="2" Margin="12" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <TextBlock Margin="7" HorizontalAlignment="Center" Text="Zaznacz atrakcje, które cię interesują" />
+                <WrapPanel Grid.Row="1">
+                    <CheckBox x:Name="MuseumCheckBox" Margin="5 0" Content="Muzea"/>
+                    <CheckBox x:Name="NationalParksCheckBox" Margin="5 0" Content="Parki Narodowe"/>
+                    <CheckBox x:Name="MonumentsCheckBox" Margin="5 0" Content="Zabytki"/>
+                    <CheckBox x:Name="RestaurantsCheckBox" Margin="5 0" Content="Restauracje"/>
+                    <CheckBox x:Name="ArtGalleriesCheckBox" Margin="5 0" Content="Galerie Sztuki"/>
+                    <CheckBox x:Name="FestivalsAndConcertsCheckBox" Margin="5 0" Content="Festiwale i Koncerty"/>
+                </WrapPanel>
+            </Grid>
+            
+            <Grid Grid.Row="3" Margin="12" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <TextBlock Margin="7" HorizontalAlignment="Center" Text="Zaznacz preferowny środek transportu" />
+                <WrapPanel Grid.Row="1">
+                    <RadioButton x:Name="AirplaneRadioButton" Margin="5 0" Content="Samolot"/>
+                    <RadioButton x:Name="BusRadioButton" Margin="5 0" Content="Autobus"/>
+                    <RadioButton x:Name="CarRadioButton" Margin="5 0" Content="Samochód"/>
+                    <RadioButton x:Name="ShipRadioButton" Margin="5 0" Content="Statek"/>
+                    <RadioButton x:Name="TrainRadioButton" Margin="5 0" Content="Pociąg"/>
+                </WrapPanel>
+            </Grid>
+            
+            <WrapPanel Grid.Row="4" Orientation="Vertical" Margin="12" HorizontalAlignment="Center">
+                <TextBlock Margin="7" HorizontalAlignment="Center" Text="Wybierz miasto" />
+                <ListBox x:Name="CitiesListBox" Margin="5" MinWidth="250" MaxWidth="450"/>
+                <TextBox x:Name="AddCityTextBox" Margin="5" Watermark="Wpisz nazwę miasta..." />
+                <Button Click="AddCityButton_OnClick" Margin="5" Content="Dodaj miasto" />
+            </WrapPanel>
+            
+            <WrapPanel Grid.Row="5" Orientation="Vertical" Margin="12" HorizontalAlignment="Center">
+                <Border HorizontalAlignment="Center" Background="DarkSeaGreen" BorderBrush="Blue" MinHeight="120" MinWidth="200" BorderThickness="3 2">
+                    <Image x:Name="CountryImage" />
+                </Border>
+                <TextBlock x:Name="CountryImageTextBlock" HorizontalAlignment="Center" Margin="7" Text="Tu pokaże się zdjęcie kraju" />
+            </WrapPanel>
+            
+            <Button Grid.Row="6" Click="SummaryButton_OnClick" HorizontalAlignment="Center" Content="Pokaż podsumowanie" />
+        </Grid>
+    </ScrollViewer>
 </Window>

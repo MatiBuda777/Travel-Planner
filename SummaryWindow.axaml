@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Travel_Planner.SummaryWindow"
+        Title="Travel Planner - Your trip summary"
+        Width="500" Height="500"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        Background="DarkOliveGreen"
+        Foreground="White">
+        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Margin="7" Text="Imię i nazwisko: " />
+                        <TextBlock x:Name="SummaryNameTextBlock"/>
+                </StackPanel>
+                
+                <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Margin="7" Text="Państwo: " />
+                        <TextBlock x:Name="SummaryCountryTextBlock"/>
+                </StackPanel>
+                
+                <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Margin="7" Text="Miasto: " />
+                        <TextBlock x:Name="SummaryCitiesTextBlock"/>
+                </StackPanel>
+               
+                <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Margin="7" Text="Wybrane trakcje: " />
+                        <TextBlock x:Name="SummaryAttractionsTextBlock"/>
+                </StackPanel>
+                
+                <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Margin="7" Text="Preferowany środek transportu: " />
+                        <TextBlock x:Name="SummaryTransportTextBlock"/>
+                </StackPanel>
+                
+        </StackPanel>
+</Window>

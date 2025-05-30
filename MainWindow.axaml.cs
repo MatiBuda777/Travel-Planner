@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 
 namespace Travel_Planner;
 
 public partial class MainWindow : Window
 {
-    private List<string> _countries = new List<string>
+    private List<string> _countries = new()
     {
         "Afganistan", "Albania", "Algieria", "Andora", "Angola", "Antigua i Barbuda", "Arabia Saudyjska", "Argentyna",
         "Armenia", "Australia", "Austria", "Azerbejdżan", "Bahamy", "Bahrajn", "Bangladesz", "Barbados", "Belgia",
@@ -34,9 +36,39 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        foreach (var country in _countries)
+        CountriesComboBox.ItemsSource = _countries;
+    }
+
+    private void SummaryButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var summaryWindow = new SummaryWindow();
+        summaryWindow.NameSurname = $"{NameTextBox.Text} {SurnameTextBox.Text}";
+        summaryWindow.Country = CountriesComboBox?.SelectionBoxItem?.ToString() ?? "Nie wybrano państwa";
+        summaryWindow.City = CitiesListBox?.SelectedItems?.ToString() ?? "Nie wybrano miasta";
+        var selectedAttractions = new List<string>
         {
-            var newItem = new ComboBoxItem();
-        }
+            MuseumCheckBox.IsChecked == true ? "Muzea" : null,
+            NationalParksCheckBox.IsChecked == true ? "Parki Narodowe" : null,
+            MonumentsCheckBox.IsChecked == true ? "Zabytki" : null,
+            RestaurantsCheckBox.IsChecked == true ? "Restauracje" : null,
+            ArtGalleriesCheckBox.IsChecked == true ? "Galerie Sztuki" : null,
+            FestivalsAndConcertsCheckBox.IsChecked == true ? "Festiwale i Koncerty" : null,
+        }.Where(attraction => attraction != null).ToList();
+        var result = string.Join(", ", selectedAttractions);
+        summaryWindow.Attractions = result;
+        
+        var transport = AirplaneRadioButton.IsChecked == true ? "Samolot" :
+            BusRadioButton.IsChecked == true ? "Autobus" :
+            CarRadioButton.IsChecked == true ? "Samochód" :
+            ShipRadioButton.IsChecked == true ? "Statek" :
+            TrainRadioButton.IsChecked == true ? "Pociąg" : "Brak";
+        summaryWindow.Transport = transport;
+        summaryWindow.ShowDialog(this);
+    }
+
+    private void AddCityButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var cityName = AddCityTextBox.Text;
+        CitiesListBox.Items.Add(cityName);
     }
 }
