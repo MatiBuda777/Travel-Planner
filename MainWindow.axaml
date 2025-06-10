@@ -13,7 +13,7 @@
         
         <Grid HorizontalAlignment="Center">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -68,7 +68,7 @@
             
             <WrapPanel Grid.Row="4" Orientation="Vertical" Margin="12" HorizontalAlignment="Center">
                 <TextBlock Margin="7" HorizontalAlignment="Center" Text="Wybierz miasto" />
-                <ListBox x:Name="CitiesListBox" Margin="5" MinWidth="250" MaxWidth="450"/>
+                <ListBox x:Name="CitiesListBox" SelectionChanged="CitiesListBox_OnSelectionChanged" Margin="5" MinWidth="250" MaxWidth="450"/>
                 <TextBox x:Name="AddCityTextBox" Margin="5" Watermark="Wpisz nazwę miasta..." />
                 <Button Click="AddCityButton_OnClick" Margin="5" Content="Dodaj miasto" />
             </WrapPanel>

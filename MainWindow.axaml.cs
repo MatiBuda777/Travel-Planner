@@ -7,8 +7,8 @@ namespace Travel_Planner;
 
 public partial class MainWindow : Window
 {
-    private List<string> _countries = new()
-    {
+    private readonly List<string> _countries =
+    [
         "Afganistan", "Albania", "Algieria", "Andora", "Angola", "Antigua i Barbuda", "Arabia Saudyjska", "Argentyna",
         "Armenia", "Australia", "Austria", "Azerbejdżan", "Bahamy", "Bahrajn", "Bangladesz", "Barbados", "Belgia",
         "Belize", "Benin", "Bhutan", "Białoruś", "Boliwia", "Bośnia i Hercegowina", "Botswana", "Brazylia", "Brunei",
@@ -30,7 +30,7 @@ public partial class MainWindow : Window
         "Togo", "Tonga", "Trynidad i Tobago", "Tunezja", "Turcja", "Turkmenistan", "Tuvalu", "Uganda", "Ukraina",
         "Urugwaj", "USA", "Uzbekistan", "Vanuatu", "Watykan", "Wenezuela", "Węgry", "Wielka Brytania", "Wietnam",
         "Wybrzeże Kości Słoniowej", "Wyspy Marshalla", "Wyspy Salomona", "Zambia", "Zimbabwe"
-    };
+    ];
     
     public MainWindow()
     {
@@ -41,10 +41,14 @@ public partial class MainWindow : Window
 
     private void SummaryButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        var summaryWindow = new SummaryWindow();
-        summaryWindow.NameSurname = $"{NameTextBox.Text} {SurnameTextBox.Text}";
-        summaryWindow.Country = CountriesComboBox?.SelectionBoxItem?.ToString() ?? "Nie wybrano państwa";
-        summaryWindow.City = CitiesListBox?.SelectedItems?.ToString() ?? "Nie wybrano miasta";
+        if (NameTextBox.Text == null || SurnameTextBox == null) return;
+        if (CountriesComboBox.SelectedItem == null) return;
+        if (CitiesListBox.SelectedItem == null) return;
+        
+        var nameSurname = $"{NameTextBox.Text} {SurnameTextBox.Text}";
+        var country = CountriesComboBox?.SelectedItem?.ToString() ?? "Nie wybrano państwa";
+        var city = CitiesListBox?.SelectedItem?.ToString() ?? "Nie wybrano miasta";
+        
         var selectedAttractions = new List<string>
         {
             MuseumCheckBox.IsChecked == true ? "Muzea" : null,
@@ -53,22 +57,29 @@ public partial class MainWindow : Window
             RestaurantsCheckBox.IsChecked == true ? "Restauracje" : null,
             ArtGalleriesCheckBox.IsChecked == true ? "Galerie Sztuki" : null,
             FestivalsAndConcertsCheckBox.IsChecked == true ? "Festiwale i Koncerty" : null,
-        }.Where(attraction => attraction != null).ToList();
-        var result = string.Join(", ", selectedAttractions);
-        summaryWindow.Attractions = result;
+        }.Where(x => x != null).ToList();
+        if (selectedAttractions.Count == 0) selectedAttractions.Add("Brak");
+        var attractions = string.Join(", ", selectedAttractions);
         
         var transport = AirplaneRadioButton.IsChecked == true ? "Samolot" :
             BusRadioButton.IsChecked == true ? "Autobus" :
             CarRadioButton.IsChecked == true ? "Samochód" :
             ShipRadioButton.IsChecked == true ? "Statek" :
             TrainRadioButton.IsChecked == true ? "Pociąg" : "Brak";
-        summaryWindow.Transport = transport;
+
+        var summaryWindow = new SummaryWindow(nameSurname, country, city, attractions, transport);
         summaryWindow.ShowDialog(this);
     }
 
     private void AddCityButton_OnClick(object? sender, RoutedEventArgs e)
     {
         var cityName = AddCityTextBox.Text;
+        if (string.IsNullOrEmpty(cityName)) return;
         CitiesListBox.Items.Add(cityName);
+    }
+
+    private void CitiesListBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        var selectedItem = CitiesListBox.SelectedItem as Label;
     }
 }
